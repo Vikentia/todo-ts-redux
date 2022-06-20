@@ -1,0 +1,62 @@
+.App {
+  text-align: center;
+  min-height: 100vh;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(0deg, rgba(2, 0, 36, 1) 0%, rgba(13, 178, 211, 1) 100%, rgba(255, 0, 101, 1) 100%);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 26px;
+
+  .container {
+    border: 5px solid white;
+    border-radius: 20px;
+    min-height: 500px;
+    width: 30vw;
+    margin: auto;
+
+  }
+
+  .title {
+    margin: 30px 0;
+    cursor: pointer;
+  }
+
+  .inputBlock {
+    font-family: inherit;
+    display: flex;
+    margin: 0 10px 30px;
+
+
+    input {
+      box-sizing: border-box;
+      line-height: 1.5;
+      display: block;
+      width: 75%;
+      padding: 5px 10px;
+      font-size: 20px;
+      background-color: #fff;
+      border: 1px solid #bdbdbd;
+      border-radius: 5px;
+    }
+
+    button {
+      color: white;
+      background-color: rgb(66, 26, 148);
+      border: none;
+      border-radius: 5px;
+      padding: 7px 12px;
+      font-size: 16px;
+      margin-left: 5px;
+      width: 25%;
+      min-width: 90px;
+    }
+  }
+
+  .taskBlock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+
+}
