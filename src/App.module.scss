@@ -5,6 +5,7 @@
   background: linear-gradient(0deg, rgba(2, 0, 36, 1) 0%, rgba(13, 178, 211, 1) 100%, rgba(255, 0, 101, 1) 100%);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 26px;
+  padding-top: 70px;
 
   .container {
     border: 5px solid white;
@@ -12,7 +13,6 @@
     min-height: 500px;
     width: 30vw;
     margin: auto;
-
   }
 
   .title {
@@ -57,6 +57,7 @@
     justify-content: center;
     flex-direction: column;
   }
+
 
 
 }

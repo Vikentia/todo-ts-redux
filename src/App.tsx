@@ -1,62 +1,95 @@
-
-import { ChangeEvent, useState } from 'react';
-import s from './App.module.scss';
-import Task from './components/Task/Task'
+import { ChangeEvent, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { v1 } from "uuid";
+import s from "./App.module.scss";
+import Task from "./components/Task/Task";
+import {
+    addTask,
+    changeStatus,
+    changeTaskTitle,
+    changeTitle,
+    deleteTask,
+} from "./redux/actions/todoActions";
+import { AppStateType } from "./redux/store";
 
 export type TaskType = {
-  id: number
-  title: string
-  isDone: boolean
-}
+    id: string;
+    title: string;
+    isDone: boolean;
+};
 
 export const App = () => {
-  const [name, setName] = useState<string>('My Todo')
-  const [todo, setTodo] = useState<TaskType[]>([])
-  const [value, setValue] = useState<string>('')
+    const [value, setValue] = useState<string>("");
+    const [isEnabled, setIsEnabled] = useState<boolean>(false);
+    const name = useSelector<AppStateType, string>((state) => state.todo.title);
+    const tasks = useSelector<AppStateType, TaskType[]>(
+        (state) => state.todo.tasks
+    );
 
-  const onChangeHandle = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.currentTarget.value)
-  }
+    const dispatch = useDispatch();
 
-  const addTask = () => {
-    if (value) {
-      setTodo([...todo, { id: todo.length + 1, title: value, isDone: false }])
-      setValue('')
-    }
-  }
+    const onChangeHandle = (e: ChangeEvent<HTMLInputElement>) => {
+        setValue(e.currentTarget.value);
+    };
 
-  const deleteTask = (id: number) => {
-    setTodo(todo.filter(item => item.id !== id))
-  }
+    const createTask = () => {
+        if (value) {
+            dispatch(addTask(value));
+            setValue("");
+        }
+    };
 
-  const onChangeStatus = (id: number, value: boolean) => {
-    setTodo(todo.map(item => item.id === id ? { ...item, isDone: value } : item))
-  }
+    const removeTask = (id: string) => {
+        dispatch(deleteTask(id));
+    };
 
-  const changeTaskTitle = (id: number, value: string) => {
-    setTodo(todo.map(item => item.id === id ? { ...item, title: value } : item))
-  }
+    const onChangeStatus = (id: string, value: boolean) => {
+        dispatch(changeStatus(id, value));
+    };
 
-  return (
-    <div className={s.App}>
-      <div className={s.container}>
-        <div className={s.title}>{name}</div>
-        <div className={s.inputBlock}>
-          <input value={value} onChange={onChangeHandle} />
-          <button onClick={addTask}>Добавить</button>
+    const updateTaskTitle = (id: string, value: string) => {
+        dispatch(changeTaskTitle(id, value));
+    };
+
+    const changeMainTitle = (e: ChangeEvent<HTMLInputElement>) => {
+        dispatch(changeTitle(e.currentTarget.value));
+    };
+
+    return (
+        <div className={s.App}>
+            <div className={s.container}>
+                <div className={s.title}>
+                    {isEnabled ? (
+                        <input
+                            value={name}
+                            onChange={changeMainTitle}
+                            onBlur={() => setIsEnabled(false)}
+                            autoFocus
+                        />
+                    ) : (
+                        <div onDoubleClick={() => setIsEnabled(true)}>
+                            {name}
+                        </div>
+                    )}
+                </div>
+
+                <div className={s.inputBlock}>
+                    <input value={value} onChange={onChangeHandle} autoFocus />
+                    <button onClick={createTask}>Добавить</button>
+                </div>
+
+                <div className={s.taskBlock}>
+                    {tasks.map((item) => (
+                        <Task
+                            key={item.id}
+                            item={item}
+                            deleteTask={removeTask}
+                            onChangeStatus={onChangeStatus}
+                            changeTaskTitle={updateTaskTitle}
+                        />
+                    ))}
+                </div>
+            </div>
         </div>
-        <div className={s.taskBlock} >
-          {
-            todo.map(item => <Task
-              key={item.id}
-              item={item}
-              deleteTask={deleteTask}
-              onChangeStatus={onChangeStatus}
-              changeTaskTitle={changeTaskTitle}
-            />)
-          }
-        </div>
-      </div>
-    </div>
-  );
-}
+    );
+};

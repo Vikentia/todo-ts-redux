@@ -1,66 +1,70 @@
-import { ChangeEvent, useState } from 'react'
-import { TaskType } from '../../App'
-import s from './Task.module.scss'
+import { ChangeEvent, useState } from "react";
+import { TaskType } from "../../App";
+import s from "./Task.module.scss";
 
 type TaskPropsType = {
-    item: TaskType
-    deleteTask: (id: number) => void
-    onChangeStatus: (id: number, value: boolean) => void
-    changeTaskTitle: (id: number, value: string) => void
-}
+    item: TaskType;
+    deleteTask: (id: string) => void;
+    onChangeStatus: (id: string, value: boolean) => void;
+    changeTaskTitle: (id: string, value: string) => void;
+};
 
 const Task = ({ item, ...props }: TaskPropsType) => {
-
     const [inputValue, setInputValue] = useState<string>(item.title);
     const [isOn, setIsOn] = useState<boolean>(false);
 
     const removeTask = () => {
-        props.deleteTask(item.id)
-    }
+        props.deleteTask(item.id);
+    };
 
     const changeTaskStatus = (value: boolean) => {
-        props.onChangeStatus(item.id, value)
-    }
+        props.onChangeStatus(item.id, value);
+    };
 
     const setInputOn = () => {
         setIsOn(true);
-    }
+    };
 
     const setInputOff = () => {
         setIsOn(false);
-        renameTask()
-    }
+        renameTask();
+    };
 
     const renameTask = () => {
-        props.changeTaskTitle(item.id, inputValue)
-
-    }
+        props.changeTaskTitle(item.id, inputValue);
+    };
 
     const onChangeTaskTitle = (e: ChangeEvent<HTMLInputElement>) => {
-        setInputValue(e.currentTarget.value)
-    }
+        setInputValue(e.currentTarget.value);
+    };
 
     return (
         <div className={s.taskContainer}>
             <div>
                 <input
-                    type={'checkbox'}
+                    type={"checkbox"}
                     checked={item.isDone}
                     onChange={(e) => changeTaskStatus(e.currentTarget.checked)}
                 />
             </div>
-            {
-                isOn
-                    ? <input value={inputValue} onChange={onChangeTaskTitle} onBlur={setInputOff} autoFocus onKeyPress={(e) => {
-                        if (e.key === 'Enter') setInputOff()
-                    }} />
-                    : <div onDoubleClick={setInputOn}>
-                        {item.title}
-                    </div>
-            }
+            {isOn ? (
+                <input
+                    value={inputValue}
+                    onChange={onChangeTaskTitle}
+                    onBlur={setInputOff}
+                    autoFocus
+                    onKeyPress={(e) => {
+                        if (e.key === "Enter") setInputOff();
+                    }}
+                />
+            ) : (
+                <div className={s.taskTitle} onDoubleClick={setInputOn}>
+                    {item.title}
+                </div>
+            )}
             <button onClick={removeTask}>✘</button>
         </div>
-    )
-}
+    );
+};
 
-export default Task
+export default Task;
