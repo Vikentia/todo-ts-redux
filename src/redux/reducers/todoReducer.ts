@@ -1,13 +1,13 @@
 import {
   AddTaskActionType,
   deleteTaskActionType,
-  ADD_TASK,
-  DELETE_TASK,
   changeTitleActionType,
-  CHANGE_TITLE,
-  CHANGE_STATUS,
   changeStatusActionType,
   changeTaskTitleActionType,
+  ADD_TASK,
+  DELETE_TASK,
+  CHANGE_TITLE,
+  CHANGE_STATUS,
   CHANGE_TASK_TITLE
 } from '../actions/todoActions';
 import { TaskType } from "../../App";
@@ -15,10 +15,7 @@ import { v1 } from "uuid";
 
 const initialState = {
   title: 'My Todo',
-  tasks: [
-    { id: '1', title: "Первая задача", isDone: false },
-    { id: '2', title: "Вторая задача", isDone: true },
-  ] as TaskType[],
+  tasks: [] as TaskType[],
 };
 
 export const todoReducer = (state = initialState, action: ActionsTypes) => {

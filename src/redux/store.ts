@@ -8,8 +8,9 @@ export const rootReducer = combineReducers({
     todo: todoReducer,
 })
 
-export type AppStateType = ReturnType<typeof store.getState>
 type RootReducerType = typeof rootReducer
+
+export type AppStateType = ReturnType<typeof store.getState>
 export type AppStoreType = ReturnType<RootReducerType>
 
 export const store = createStore(rootReducer, composeEnhancers());
