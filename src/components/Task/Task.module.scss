@@ -4,13 +4,14 @@
     display: grid;
     grid-template-columns: 1fr 17fr 1fr;
 
-
     button {
         width: 25px;
         height: 25px;
         align-self: center;
     }
+}
 
+.taskCheckbox {
 }
 
 .taskTitle {

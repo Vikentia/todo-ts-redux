@@ -29,7 +29,7 @@ export const changeTaskTitle = (id: string, value: string) => ({
 
 //action types
 export type AddTaskActionType = ReturnType<typeof addTask>;
-export type deleteTaskActionType = ReturnType<typeof deleteTask>;
-export type changeTitleActionType = ReturnType<typeof changeTitle>;
-export type changeStatusActionType = ReturnType<typeof changeStatus>;
-export type changeTaskTitleActionType = ReturnType<typeof changeTaskTitle>;
+export type DeleteTaskActionType = ReturnType<typeof deleteTask>;
+export type ChangeTitleActionType = ReturnType<typeof changeTitle>;
+export type ChangeStatusActionType = ReturnType<typeof changeStatus>;
+export type ChangeTaskTitleActionType = ReturnType<typeof changeTaskTitle>;

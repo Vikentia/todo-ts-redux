@@ -40,8 +40,9 @@ const Task = ({ item, ...props }: TaskPropsType) => {
 
     return (
         <div className={s.taskContainer}>
-            <div>
+            <div className={s.taskCheckbox}>
                 <input
+                    id={`checkbox_${item.id}`}
                     type={"checkbox"}
                     checked={item.isDone}
                     onChange={(e) => changeTaskStatus(e.currentTarget.checked)}
@@ -59,7 +60,8 @@ const Task = ({ item, ...props }: TaskPropsType) => {
                 />
             ) : (
                 <div className={s.taskTitle} onDoubleClick={setInputOn}>
-                    {item.title}
+                    {/* {item.title} */}
+                    <label htmlFor={`checkbox_${item.id}`}> {item.title}</label>
                 </div>
             )}
             <button onClick={removeTask}>✘</button>

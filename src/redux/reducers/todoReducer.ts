@@ -1,9 +1,9 @@
 import {
   AddTaskActionType,
-  deleteTaskActionType,
-  changeTitleActionType,
-  changeStatusActionType,
-  changeTaskTitleActionType,
+  DeleteTaskActionType,
+  ChangeTitleActionType,
+  ChangeStatusActionType,
+  ChangeTaskTitleActionType,
   ADD_TASK,
   DELETE_TASK,
   CHANGE_TITLE,
@@ -54,4 +54,4 @@ export const todoReducer = (state = initialState, action: ActionsTypes) => {
 
 //types
 const InitialStateType = typeof initialState;
-type ActionsTypes = AddTaskActionType | deleteTaskActionType | changeTitleActionType | changeStatusActionType | changeTaskTitleActionType;
+type ActionsTypes = AddTaskActionType | DeleteTaskActionType | ChangeTitleActionType | ChangeStatusActionType | ChangeTaskTitleActionType;

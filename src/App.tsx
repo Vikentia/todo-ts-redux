@@ -54,9 +54,7 @@ export const App = () => {
     };
     const setFilter = (e: ChangeEvent<HTMLSelectElement>) => {
         setFilteredTasks(e.target.value as FilteredTaskType);
-        console.log(filteredTasks);
     };
-
     return (
         <div className={s.App}>
             <div className={s.container}>
